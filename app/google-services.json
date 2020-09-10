@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "967826356335",
+    "firebase_url": "https://blitz-timer.firebaseio.com",
+    "project_id": "blitz-timer",
+    "storage_bucket": "blitz-timer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967826356335:android:40114d70fe0007b663b59a",
+        "android_client_info": {
+          "package_name": "com.example.blitztimer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "967826356335-c4r8k3jb3chl69guloruc1fpkj8e1p9b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2DhXf_rkzWqSfu2hd_YVqmkGDBHAP52s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "967826356335-c4r8k3jb3chl69guloruc1fpkj8e1p9b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Blitz Timer</string>
+    <string name="blitz_jest_to_najpopularniejszy_typ_rozgrywki_nazywany_r_wnie_szachami_b_yskawicznymi_gracze_maj_tutaj_okre_lony_czas_na_wszystkie_swoje_ruchy">Blitz jest to najpopularniejszy typ rozgrywki nazywany również szachami błyskawicznymi, gracze mają tutaj określony czas na wszystkie swoje ruchy.</string>
+    <string name="blitz_jest_to_najpopularniejszy_typ_rozgrywki_nazywany_r_wnie_szachami_b_yskawicznymi_gracze_maj_tutaj_okre_lony_czas_na_wszystkie_swoje_ruchy_czas_odlicza_się_tylko_wtedy_gdy_jest_jego_ruch" />
+    <string name="czas">czas</string>
+    <string name="tryb_bardzo_podobny_do_blitz_jednak_tutaj_podczas_wykonania_ruchu_i_klikni_cia_na_timer_graczowi_doliczane_jest_10_sekund_mo_na_dzi_ki_temu_poprzez_szybkie_ruchy_zwi_kszy_swoje_szanse">Tryb bardzo podobny do blitz, jednak tutaj podczas wykonania ruchu i kliknięcia na timer, graczowi doliczane jest 10 sekund, można dzięki temu poprzez szybkie ruchy zwiększyć swoje szanse</string>
+    <string name="nazwisko">Nazwisko:</string>
+</resources>

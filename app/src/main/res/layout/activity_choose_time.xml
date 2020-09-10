@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/blitzbackground"
+    tools:context=".ChooseTimeActivity">
+
+    <TextView
+        android:id="@+id/timeTitleTextView"
+        android:layout_width="319dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="Wybierz czas oraz graczy"
+        android:textColor="#DF8F2E"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerTimeForWhite"
+        android:layout_width="112dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="24dp"
+        android:background="@android:drawable/arrow_down_float"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.153"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/forWhiteTextView" />
+
+
+    <TextView
+        android:id="@+id/forWhiteTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Dla Białego"
+        android:textColor="#DF8F2E"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.155"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeTitleTextView" />
+
+    <TextView
+        android:id="@+id/forBlackTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:text="Dla Czarnego"
+        android:textColor="#DF8F2E"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.158"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerTimeForWhite" />
+
+    <Spinner
+        android:id="@+id/spinnerTimeForBlack"
+        android:layout_width="112dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="40dp"
+        android:background="@android:drawable/arrow_down_float"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.153"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/forBlackTextView" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="166dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="32dp"
+        android:background="#BD753D"
+        android:onClick="startGame"
+        android:text="Rozpocznij grę"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+    <TextView
+        android:id="@+id/whitePlayerTextView"
+        android:layout_width="102dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="44dp"
+        android:text="Gracz"
+        android:textColor="#DF8F2E"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeTitleTextView" />
+
+    <Spinner
+        android:id="@+id/changeWhitePlayerSpinner"
+        android:layout_width="112dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:drawable/arrow_down_float"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.879"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/whitePlayerTextView" />
+
+    <TextView
+        android:id="@+id/blackPlayerTextView"
+        android:layout_width="125dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="36dp"
+        android:text="gracz"
+        android:textColor="#DF8F2E"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/changeWhitePlayerSpinner" />
+
+    <Spinner
+        android:id="@+id/changeBlackPlayerSpinner"
+        android:layout_width="112dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="28dp"
+        android:background="@android:drawable/arrow_down_float"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.836"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/blackPlayerTextView" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:background="#473A2B"
+        android:onClick="newPlayer"
+        android:text="Dodaj nowego gracza"
+        android:textColor="#E3AB8A"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/changeBlackPlayerSpinner" />
+</androidx.constraintlayout.widget.ConstraintLayout>
