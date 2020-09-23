@@ -111,10 +111,12 @@ class MainActivity : AppCompatActivity() {
         }
     fun onBlitzClicked(view: View) {
         val intent = Intent(this,ChooseTimeActivity::class.java)
+        intent.putExtra("mode","blitz")
         startActivity(intent)
     }
     fun onSecondPlusClicked(view: View){
-        val intent = Intent(this,PlusSecondGameActivity::class.java)
+        val intent = Intent(this,ChooseTimeActivity::class.java)
+        intent.putExtra("mode","+10 second")
         startActivity(intent)
     }
 }

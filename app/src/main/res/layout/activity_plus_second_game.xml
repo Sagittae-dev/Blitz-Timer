@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/blitzbackground"
-    tools:context=".PlusSecondGameActivity">
+    tools:context=".gametypes.PlusSecondGameActivity">
 
     <Button
         android:id="@+id/blackButton"

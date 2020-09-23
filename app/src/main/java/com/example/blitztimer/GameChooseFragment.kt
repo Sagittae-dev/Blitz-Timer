@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.blitztimer.gametypes.PlusSecondGameActivity
 
 class GameChooseFragment: Fragment() {
 
@@ -17,7 +18,8 @@ class GameChooseFragment: Fragment() {
         startActivity(intent)
     }
     fun onSecondPlusClicked(view: View){
-        val intent = Intent(activity,PlusSecondGameActivity::class.java)
+        val intent = Intent(activity,
+            PlusSecondGameActivity::class.java)
         startActivity(intent)
     }
 }

@@ -1,11 +1,10 @@
-package com.example.blitztimer
+package com.example.blitztimer.gametypes
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.SystemClock
-import android.widget.Chronometer
+import com.example.blitztimer.R
 import kotlinx.android.synthetic.main.activity_plus_second_game.*
-import java.util.*
 
 class PlusSecondGameActivity : AppCompatActivity() {
 

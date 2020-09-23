@@ -8,10 +8,24 @@
     tools:context=".ChooseTimeActivity">
 
     <TextView
+        android:id="@+id/modeTitleTextView"
+        android:layout_width="319dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="36dp"
+        android:gravity="center"
+        android:text="tryb gry"
+        android:textColor="#DF8F2E"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/timeTitleTextView"
         android:layout_width="319dp"
         android:layout_height="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="100dp"
         android:gravity="center"
         android:text="Wybierz czas oraz graczy"
         android:textColor="#DF8F2E"
@@ -142,4 +156,5 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/changeBlackPlayerSpinner" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

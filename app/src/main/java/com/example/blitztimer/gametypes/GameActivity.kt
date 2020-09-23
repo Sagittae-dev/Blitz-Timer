@@ -1,4 +1,4 @@
-package com.example.blitztimer
+package com.example.blitztimer.gametypes
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -8,8 +8,10 @@ import android.os.CountDownTimer
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.example.blitztimer.ChooseTimeActivity
 import com.example.blitztimer.MainActivity.Companion.fireRef
 import com.example.blitztimer.MainActivity.Companion.listaGraczy
+import com.example.blitztimer.R
 import com.example.blitztimer.gameshistory.GamesHistoryItem
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.android.synthetic.main.games_history_fragment.*
@@ -17,6 +19,7 @@ import java.time.LocalDateTime
 
 class GameActivity : AppCompatActivity() {
 
+        private var gameModeIsBlitz: Boolean = true
         var timeToWhiteInMillis:Long =0
         var timeToBlackInMillis:Long=0
         private var whiteCountDownTimer: CountDownTimer? = null
@@ -31,7 +34,7 @@ class GameActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
-        sound = MediaPlayer.create(this,R.raw.finish)
+        sound = MediaPlayer.create(this, R.raw.finish)
         val whiteButton: Button = findViewById(R.id.whiteButton)
         val blackButton: Button = findViewById(R.id.blackButton)
         timeToWhiteInMillis = intent.getLongExtra("timeToWhite",0)*60
@@ -39,6 +42,7 @@ class GameActivity : AppCompatActivity() {
         whiteButton.text = intent.getStringExtra("whitePlayer")!!+"\n" +((timeToWhiteInMillis/1000)/60).toString()+":0"+ ((timeToWhiteInMillis/1000)%60).toString()
         blackButton.text = intent.getStringExtra("blackPlayer")!!+"\n" +((timeToBlackInMillis/1000)/60).toString()+":0"+ ((timeToBlackInMillis/1000)%60).toString()
         hideResumeAndWinsAndBackToResultButtonsAndShowPauseButton()
+        gameModeIsBlitz = intent.getStringExtra("gameMode")!! == "blitz"
     }
 
     override fun onPause() {
@@ -90,12 +94,8 @@ class GameActivity : AppCompatActivity() {
         blackCountDownTimer = object : CountDownTimer(timeToBlackInMillis, 1000) {
             @SuppressLint("SetTextI18n")
             override fun onTick(millisUntilFinishedforblack: Long) {
-                if(((timeToBlackInMillis / 1000) % 60)>=10) {
-                    blackButton.text = intent.getStringExtra("blackPlayer")!!+"\n" +((timeToBlackInMillis / 1000) / 60).toString() + ":" + ((timeToBlackInMillis / 1000) % 60).toString()
-                }
-                else {
-                    blackButton.text = intent.getStringExtra("blackPlayer")!!+"\n" +((timeToBlackInMillis / 1000) / 60).toString() + ":0" + ((timeToBlackInMillis / 1000) % 60).toString()
-                }
+
+                setTextInBlackOrWhiteTimerButton(blackButton,timeToBlackInMillis)
                 timeToBlackInMillis = millisUntilFinishedforblack
             }
             @SuppressLint("SetTextI18n")
@@ -108,12 +108,25 @@ class GameActivity : AppCompatActivity() {
         }.start()
     }
 
+    @SuppressLint("SetTextI18n")
+    fun setTextInBlackOrWhiteTimerButton(button : Button, timeToPlayerInMillis : Long){
+        if(((timeToBlackInMillis / 1000) % 60)>=10) {
+        button.text = intent.getStringExtra("blackPlayer")!!+"\n" +((timeToBlackInMillis / 1000) / 60).toString() + ":" + ((timeToBlackInMillis / 1000) % 60).toString()
+        }
+        else {
+            blackButton.text = intent.getStringExtra("blackPlayer")!!+"\n" +((timeToBlackInMillis / 1000) / 60).toString() + ":0" + ((timeToBlackInMillis / 1000) % 60).toString()
+        }
+    }
+
+
     fun blackIsClicked(view: View){
         whiteTimerIsActiveAndBlackIsNotActive = true
         whiteButton.isClickable = true
         blackButton.isClickable = false
         blackCountDownTimer?.cancel()
         acivateWhiteCountDownTimer()
+        if (!gameModeIsBlitz)
+        timeToBlackInMillis += 10000
     }
 
     fun whiteIsClicked(view: View){
@@ -122,6 +135,8 @@ class GameActivity : AppCompatActivity() {
         blackButton.isClickable = true
         whiteCountDownTimer?.cancel()
         activateBlackCountdownTimer()
+        if (!gameModeIsBlitz)
+        timeToWhiteInMillis += 10000
     }
 
     private fun finishAndSendResults(wygrany: Int) { // 0- wygrał biały, 1 wygrał czarny
@@ -164,7 +179,7 @@ class GameActivity : AppCompatActivity() {
             whiteResult,
             blackResult,
             "${LocalDateTime.now().year}-${LocalDateTime.now().month}-${LocalDateTime.now().dayOfMonth}  ${LocalDateTime.now().hour}:${minuteToString}",
-            System.currentTimeMillis(),"blitz"
+            System.currentTimeMillis(),intent.getStringExtra("gameMode")!!
             ))
 
     }

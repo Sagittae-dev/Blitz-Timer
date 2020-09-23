@@ -13,8 +13,8 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".NewPlayerActivity"></activity>
         <activity android:name=".GameChooseFragment" />
-        <activity android:name=".PlusSecondGameActivity" />
-        <activity android:name=".GameActivity" />
+        <activity android:name=".gametypes.PlusSecondGameActivity" />
+        <activity android:name=".gametypes.GameActivity" />
         <activity android:name=".ChooseTimeActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

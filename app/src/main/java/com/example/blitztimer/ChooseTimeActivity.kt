@@ -1,5 +1,6 @@
 package com.example.blitztimer
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -9,10 +10,12 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.example.blitztimer.MainActivity.Companion.listaGraczy
+import com.example.blitztimer.gametypes.GameActivity
 import kotlinx.android.synthetic.main.activity_choose_time.*
 
 class ChooseTimeActivity : AppCompatActivity() {
 
+        var gameMode : String? = null
         var timeToWhite: Int = 0
         var timeToBlack: Int = 0
         var choosenWhitePlayer : String? = null
@@ -36,7 +39,15 @@ class ChooseTimeActivity : AppCompatActivity() {
         setTimeSpinners()
         setPlayersSpinners()
         chooseTimeActivity = this
+        setThisTitleAndMode()
+        gameMode = intent.getStringExtra("mode")
     }
+
+    @SuppressLint("SetTextI18n")
+    private fun setThisTitleAndMode() {
+        modeTitleTextView.text = "Tryb ${intent.getStringExtra("mode")}"
+    }
+
     private fun setAdapters() {
         changeWhitePlayerSpinner.adapter = adapterNames
         changeBlackPlayerSpinner.adapter = adapterNames
@@ -122,6 +133,7 @@ class ChooseTimeActivity : AppCompatActivity() {
         intent.putExtra("whitePlayer", choosenWhitePlayer)
         intent.putExtra("blackPlayerId", choosenBlackPlayerId)
         intent.putExtra("whitePlayerId", choosenWhitePlayerId)
+        intent.putExtra("gameMode", gameMode)
         startActivity(intent)
     }
     fun newPlayer(view: View){
