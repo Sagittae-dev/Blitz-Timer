@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.blitztimer.R
 
-class PlayersFragmentItemAdapter(val players: ArrayList<PlayersFragmentItem>) : RecyclerView.Adapter<PlayersFragmentItemAdapter.ViewHolder>() {
+class PlayersFragmentItemAdapter(val players: HashSet<PlayersFragmentItem>) : RecyclerView.Adapter<PlayersFragmentItemAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayersFragmentItemAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.players_fragment_item,parent,false)
         return ViewHolder(view)

@@ -18,7 +18,6 @@ class PlayersFragment: Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         listOfPlayers.layoutManager = LinearLayoutManager(context)
         listOfPlayers.adapter = PlayersFragmentItemAdapter(listaGraczy)
     }

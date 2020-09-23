@@ -70,7 +70,7 @@
         app:layout_constraintTop_toBottomOf="@+id/forBlackTextView" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/startGameButton"
         android:layout_width="166dp"
         android:layout_height="80dp"
         android:layout_marginTop="32dp"

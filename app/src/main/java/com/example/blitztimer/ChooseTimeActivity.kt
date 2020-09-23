@@ -1,20 +1,15 @@
 package com.example.blitztimer
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import com.example.blitztimer.MainActivity.Companion.listaGraczy
-import com.example.blitztimer.playerslist.PlayersFragment
-import com.example.blitztimer.playerslist.PlayersFragmentItem
-import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_choose_time.*
-import kotlinx.android.synthetic.main.activity_new_player.*
-import java.util.*
 
 class ChooseTimeActivity : AppCompatActivity() {
 
@@ -24,23 +19,23 @@ class ChooseTimeActivity : AppCompatActivity() {
         var choosenBlackPlayer : String? = null
         var choosenWhitePlayerId : String? = null
         var choosenBlackPlayerId : String? = null
-        var listOfPlayersNames = arrayListOf<String>()
+        private var listOfPlayersNames = arrayListOf<String>()
         val arraySpinner = arrayListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-        var adapterTimes: ArrayAdapter<Int>?  = null
+        private var adapterTimes: ArrayAdapter<Int>?  = null
     companion object{
         var adapterNames: ArrayAdapter<String>? = null
+        var chooseTimeActivity : ChooseTimeActivity? = null
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choose_time)
         setPlayersNamesList()
         adapterTimes = ArrayAdapter(this,android.R.layout.simple_spinner_item, arraySpinner)
-
-
-        adapterNames = ArrayAdapter(this,android.R.layout.simple_spinner_item,listOfPlayersNames)
+        adapterNames = ArrayAdapter(this,android.R.layout.simple_spinner_item, listOfPlayersNames)
         setAdapters()
         setTimeSpinners()
         setPlayersSpinners()
+        chooseTimeActivity = this
     }
     private fun setAdapters() {
         changeWhitePlayerSpinner.adapter = adapterNames
@@ -60,18 +55,35 @@ class ChooseTimeActivity : AppCompatActivity() {
         changeWhitePlayerSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                choosenWhitePlayerId  = listaGraczy.get(position).id
-                choosenWhitePlayer  = listaGraczy.get(position).name
+                val listOfPlayersForSpinner = listaGraczy.toList()
+                choosenWhitePlayerId  = listOfPlayersForSpinner[position].id
+                choosenWhitePlayer  = listOfPlayersForSpinner[position].name
                 whitePlayerTextView.text = choosenWhitePlayer
+                println(choosenWhitePlayerId)
+                if (choosenBlackPlayer.equals(choosenWhitePlayer)){
+                    startGameButton.isClickable = false
+                    startGameButton.setBackgroundColor(Color.GRAY)
+                }else {
+                    startGameButton.isClickable = true
+                    startGameButton.setBackgroundColor(Color.YELLOW)
+                }
             }
         }
 
         changeBlackPlayerSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                choosenBlackPlayerId  = listaGraczy.get(position).id
-                choosenBlackPlayer  = listaGraczy.get(position).name
+                val listOfPlayersForSpinner = listaGraczy.toList()
+                choosenBlackPlayerId  = listOfPlayersForSpinner[position].id
+                choosenBlackPlayer  = listOfPlayersForSpinner[position].name
                 blackPlayerTextView.text = choosenBlackPlayer
+                if (choosenBlackPlayer.equals(choosenWhitePlayer)){
+                    startGameButton.isClickable = false
+                    startGameButton.setBackgroundColor(Color.GRAY)
+                }else {
+                    startGameButton.isClickable = true
+                    startGameButton.setBackgroundColor(Color.YELLOW)
+                }
             }
         }
 
@@ -80,8 +92,8 @@ class ChooseTimeActivity : AppCompatActivity() {
     private fun setTimeSpinners() {
         spinnerTimeForWhite?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                timeToWhite = arraySpinner.get(position)
-                val whiteMinutesDisplay = "Dla białego" +" "+ timeToWhite +" minut"
+                timeToWhite = arraySpinner[position]
+                val whiteMinutesDisplay = "Dla białego $timeToWhite minut"
                 forWhiteTextView.text = whiteMinutesDisplay
                 println(timeToWhite)
             }
@@ -90,8 +102,8 @@ class ChooseTimeActivity : AppCompatActivity() {
         }
         spinnerTimeForBlack?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                timeToBlack = arraySpinner.get(position)
-                val blackMinutesDisplay = "Dla czarnego " +" "+ timeToBlack +" minut"
+                timeToBlack = arraySpinner[position]
+                val blackMinutesDisplay = "Dla czarnego  $timeToBlack minut"
                 forBlackTextView.text = blackMinutesDisplay
                 println(timeToBlack)
             }
@@ -103,7 +115,7 @@ class ChooseTimeActivity : AppCompatActivity() {
 
 
     fun startGame(view: View){
-        var intent = Intent(this, GameActivity::class.java)
+        val intent = Intent(this, GameActivity::class.java)
         intent.putExtra("timeToWhite", timeToWhite*1000.toLong())
         intent.putExtra("timeToBlack",timeToBlack*1000.toLong())
         intent.putExtra("blackPlayer", choosenBlackPlayer)
@@ -116,11 +128,6 @@ class ChooseTimeActivity : AppCompatActivity() {
         finish()
         val intent = Intent(this,NewPlayerActivity::class.java)
         startActivity(intent)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        //setAdapters()
     }
 }
 
