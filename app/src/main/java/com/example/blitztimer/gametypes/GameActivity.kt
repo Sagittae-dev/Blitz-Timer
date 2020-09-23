@@ -72,12 +72,7 @@ class GameActivity : AppCompatActivity() {
         whiteCountDownTimer = object : CountDownTimer(timeToWhiteInMillis, 100) {
             @SuppressLint("SetTextI18n")
             override fun onTick(millisUntilFinishedForWhite: Long) {
-                if(((timeToWhiteInMillis / 1000) % 60)>=10) {
-                    whiteButton.text = intent.getStringExtra("whitePlayer")!!+"\n" +((timeToWhiteInMillis / 1000) / 60).toString() + ":" + ((timeToWhiteInMillis / 1000) % 60).toString()
-                }
-                else {
-                    whiteButton.text = intent.getStringExtra("whitePlayer")!!+"\n" +((timeToWhiteInMillis / 1000) / 60).toString() + ":0" + ((timeToWhiteInMillis / 1000) % 60).toString()
-                }
+                setTextInBlackOrWhiteTimerButton(whiteButton, timeToWhiteInMillis, "whitePlayer")
                 timeToWhiteInMillis = millisUntilFinishedForWhite
             }
             @SuppressLint("SetTextI18n")
@@ -94,8 +89,7 @@ class GameActivity : AppCompatActivity() {
         blackCountDownTimer = object : CountDownTimer(timeToBlackInMillis, 1000) {
             @SuppressLint("SetTextI18n")
             override fun onTick(millisUntilFinishedforblack: Long) {
-
-                setTextInBlackOrWhiteTimerButton(blackButton,timeToBlackInMillis)
+                setTextInBlackOrWhiteTimerButton(blackButton, timeToBlackInMillis, "blackPlayer")
                 timeToBlackInMillis = millisUntilFinishedforblack
             }
             @SuppressLint("SetTextI18n")
@@ -109,12 +103,12 @@ class GameActivity : AppCompatActivity() {
     }
 
     @SuppressLint("SetTextI18n")
-    fun setTextInBlackOrWhiteTimerButton(button : Button, timeToPlayerInMillis : Long){
-        if(((timeToBlackInMillis / 1000) % 60)>=10) {
-        button.text = intent.getStringExtra("blackPlayer")!!+"\n" +((timeToBlackInMillis / 1000) / 60).toString() + ":" + ((timeToBlackInMillis / 1000) % 60).toString()
+    fun setTextInBlackOrWhiteTimerButton(button : Button, timeToPlayerInMillis : Long, playersName : String){
+        if(((timeToPlayerInMillis / 1000) % 60)>=10) {
+        button.text = intent.getStringExtra(playersName)!!+"\n" +((timeToPlayerInMillis / 1000) / 60).toString() + ":" + ((timeToPlayerInMillis / 1000) % 60).toString()
         }
         else {
-            blackButton.text = intent.getStringExtra("blackPlayer")!!+"\n" +((timeToBlackInMillis / 1000) / 60).toString() + ":0" + ((timeToBlackInMillis / 1000) % 60).toString()
+            button.text = intent.getStringExtra(playersName)!!+"\n" +((timeToPlayerInMillis / 1000) / 60).toString() + ":0" + ((timeToPlayerInMillis / 1000) % 60).toString()
         }
     }
 
@@ -124,9 +118,11 @@ class GameActivity : AppCompatActivity() {
         whiteButton.isClickable = true
         blackButton.isClickable = false
         blackCountDownTimer?.cancel()
+        if (!gameModeIsBlitz) {
+            timeToBlackInMillis += 10000
+            setTextInBlackOrWhiteTimerButton(blackButton, timeToBlackInMillis, "blackPlayer")
+        }
         acivateWhiteCountDownTimer()
-        if (!gameModeIsBlitz)
-        timeToBlackInMillis += 10000
     }
 
     fun whiteIsClicked(view: View){
@@ -134,13 +130,18 @@ class GameActivity : AppCompatActivity() {
         whiteButton.isClickable = false
         blackButton.isClickable = true
         whiteCountDownTimer?.cancel()
+        if (!gameModeIsBlitz) {
+            timeToWhiteInMillis += 10000
+            setTextInBlackOrWhiteTimerButton(whiteButton, timeToWhiteInMillis, "whitePlayer")
+        }
         activateBlackCountdownTimer()
-        if (!gameModeIsBlitz)
-        timeToWhiteInMillis += 10000
     }
 
     private fun finishAndSendResults(wygrany: Int) { // 0- wygrał biały, 1 wygrał czarny
         pauseBothTimers()
+        pauseButton.visibility = View.INVISIBLE
+        backToResultsBoard.visibility = View.VISIBLE
+        backToResultsBoard.isClickable = true
         for(gracze in listaGraczy){
             if(gracze.id == intent.getStringExtra("whitePlayerId")) {
                 gracze.gamesPlayedByPlayer +=1

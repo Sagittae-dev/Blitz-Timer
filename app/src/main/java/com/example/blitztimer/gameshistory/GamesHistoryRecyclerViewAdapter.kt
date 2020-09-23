@@ -15,7 +15,7 @@ class GamesHistoryRecyclerViewAdapter(val games: HashMap<String, GamesHistoryIte
         return ViewHolder(view)
     }
 
-    override fun getItemCount()= games.size
+    override fun getItemCount()=games.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val gamesSortedList = games.toList().sortedWith(Comparator { o1, o2 -> if ( o1.second.timeMillis < o2.second.timeMillis) 1 else -1  })

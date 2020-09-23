@@ -1,19 +1,15 @@
 package com.example.blitztimer
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
 import com.example.blitztimer.ChooseTimeActivity.Companion.adapterNames
 import com.example.blitztimer.MainActivity.Companion.currentFragment
 import com.example.blitztimer.MainActivity.Companion.fireRef
-import com.example.blitztimer.MainActivity.Companion.listaGraczy
 import com.example.blitztimer.playerslist.PlayersFragmentItem
 import kotlinx.android.synthetic.main.activity_new_player.*
-import kotlinx.android.synthetic.main.players_fragment.*
 import java.util.*
 
 class NewPlayerActivity : AppCompatActivity() {

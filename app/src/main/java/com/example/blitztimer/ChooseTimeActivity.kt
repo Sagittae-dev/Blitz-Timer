@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_choose_time.*
 
 class ChooseTimeActivity : AppCompatActivity() {
 
-        var gameMode : String? = null
+        private var gameMode : String? = null
         var timeToWhite: Int = 0
         var timeToBlack: Int = 0
         var choosenWhitePlayer : String? = null

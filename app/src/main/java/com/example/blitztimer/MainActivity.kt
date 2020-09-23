@@ -21,8 +21,8 @@ import kotlinx.android.synthetic.main.games_history_fragment.*
 import kotlinx.android.synthetic.main.players_fragment.*
 
 class MainActivity : AppCompatActivity() {
-    val gamesRef = fireRef.child("games")
-    val playersRef = fireRef.child("players")
+    private val gamesRef = fireRef.child("games")
+    private val playersRef = fireRef.child("players")
 
     companion object {
         var currentFragment = 1
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         reloadGamesMap()
     }
 
-    fun reloadPlayers(){
+    private fun reloadPlayers(){
         val playersListener = object: ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {}
             override fun onDataChange(p0: DataSnapshot) {
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                     val playersItem = data.getValue(PlayersFragmentItem::class.java)!!
                     var graczExistInListaGraczy = false
                     for (gracze in listaGraczy){
-                        if (gracze.id.equals(playersItem.id))
+                        if (gracze.id == playersItem.id)
                             graczExistInListaGraczy = true
                     }
                     if (!graczExistInListaGraczy) {
